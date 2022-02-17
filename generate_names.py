@@ -1,8 +1,9 @@
-"""Entry point to generate random names. All settings are controlled via config.yml"""
+"""Entry point to generate random names. All settings are controlled via config.yml ."""
 
-import yaml
 from src.go_daddy import GoDaddy
 from src.random_name_generator import RandomNameGenerator
+
+import yaml
 
 config = yaml.safe_load(open("config.yml"))
 
