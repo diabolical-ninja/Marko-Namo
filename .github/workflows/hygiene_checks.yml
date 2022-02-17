@@ -27,15 +27,15 @@ jobs:
           with:
             path: linting_report.md
 
-    Test & Coverage:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
-        - uses: actions/setup-python@v2
-          with:
-            python-version: '3.8'
-        - run: pip install nox
-        - name: Generate Coverage Report
-          run: nox --sessions tests coverage
-          env:
-            CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+    # Test & Coverage:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@master
+    #     - uses: actions/setup-python@v2
+    #       with:
+    #         python-version: '3.8'
+    #     - run: pip install nox
+    #     - name: Generate Coverage Report
+    #       run: nox --sessions tests coverage
+    #       env:
+    #         CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
