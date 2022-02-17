@@ -2,7 +2,7 @@
 
 import yaml
 from src.go_daddy import GoDaddy
-from src.random_name_generator import RandomBusinessName
+from src.random_name_generator import RandomNameGenerator
 
 config = yaml.safe_load(open("config.yml"))
 
@@ -13,7 +13,7 @@ gd = GoDaddy(
 )
 
 if __name__ == "__main__":
-    rbn = RandomBusinessName(
+    rbn = RandomNameGenerator(
         name_length=config["parameters"]["maximum_name_length"],
         number_of_names=config["parameters"]["number_of_names"],
         domain_extensions=config["extensions"],

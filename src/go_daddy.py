@@ -1,11 +1,27 @@
-"""General Client for interacting with GoDaddy API"""
+"""General Client for interacting with GoDaddy API."""
+
+import json
 
 import requests
-import json
 
 
 class GoDaddy:
+    """Basic Class to interact with the GoDaddy Domains API.
+
+    https://developer.godaddy.com/doc/endpoint/domains
+    """
+
     def __init__(self, key: str, secret: str, env: str = "PROD") -> None:
+        """Initialise the class.
+
+        Key & secret are available from: https://developer.godaddy.com/keys
+
+        Args:
+            key (str): API key
+            secret (str): API secret
+            env (str, optional): Whether to use PROD or OTE (test).
+                - Defaults to "PROD".
+        """
         self.key = key
         self.secret = secret
         self.env = env
@@ -13,7 +29,22 @@ class GoDaddy:
     def check_domain_availability(
         self, domains: list, extensions: list = [".com", ".com.au"]
     ) -> dict:
+        """Bulk check of domain name availability.
 
+        Method used: https://developer.godaddy.com/doc/endpoint/domains#/v1/availableBulk
+
+        Args:
+            domains (list): Domains to check for
+            extensions (list, optional): Domain extentions to consider.
+                - Defaults to [".com", ".com.au"].
+
+        Returns:
+            dict: Objects informing:
+                - availability
+                - price
+                - currency
+                - domain name
+        """
         if self.env == "PROD":
             url = "https://api.godaddy.com/v1/domains/available"
         else:

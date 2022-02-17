@@ -2,7 +2,7 @@
 
 
 def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
-    """Combines two dictionaries where each key's value is a list
+    """Combines two dictionaries where each key's value is a list.
 
     Both dictionaries should resemble:
         {
@@ -27,7 +27,7 @@ def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
 
 
 def get_item_list(source: dict, key: str) -> list:
-    """Retrieves a list from a dictionary even if the key is not present
+    """Retrieves a list from a dictionary even if the key is not present.
 
     Args:
         source (dict): The dictionary to search through

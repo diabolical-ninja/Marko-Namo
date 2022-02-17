@@ -1,12 +1,14 @@
-"""Main class to generate random names"""
+"""Main class to generate random names."""
 
-from typing import List, Tuple
 import random
+from typing import List, Tuple
 
 import src.utils as ut
+from src.go_daddy import GoDaddy
 
 
-class RandomBusinessName:
+class RandomNameGenerator:
+    """General class to generate random names using a markov approach."""
     def __init__(
         self,
         name_length: int,
@@ -14,8 +16,19 @@ class RandomBusinessName:
         domain_extensions: List[str],
         training_words: List[str],
         n_grams: List[int] = [1, 2, 3],
-        godaddy=None,
+        godaddy: GoDaddy = None,
     ) -> None:
+        """Initialise the class.
+
+        Args:
+            name_length (int): Maximum word length for the generated name
+            number_of_names (int): How many names to attempt to create
+            domain_extensions (List[str]): Desired web domain extensions to examine, eg .com, etc
+            training_words (List[str]): The words to learn from for the generation process
+            n_grams (List[int], optional): Word parts to use in the learning phase
+                Defaults to [1, 2, 3].
+            godaddy (GoDaddy, optional): Object to interact with their API. Defaults to None.
+        """
         self.name_length = name_length
         self.number_of_names = number_of_names
         self.n_grams = n_grams
@@ -63,7 +76,7 @@ class RandomBusinessName:
                     available_domain_names.extend(all_available_extensions)
                     created_names.append(rw)
 
-        print("Generated Business Names:")
+        print("Generated Names:")
         [print(x) for x in created_names]
         if len(available_domain_names) == 0:
             print("Did not check for domain name availability")
@@ -76,8 +89,7 @@ class RandomBusinessName:
         )
 
     def word_letter_frequency(self, word: str) -> dict:
-        """For a given word, build a frequency table for the proceeding characters using a
-         lightweight markov approach.
+        """For a given word, build a frequency (markov) table for the proceeding characters.
 
         It will examine n-grams both as the reference point and the characters following.
         Eg, with a sample word of "abcd"
@@ -124,7 +136,7 @@ class RandomBusinessName:
     def create_random_word(
         self, reference_words: list, maximum_word_length: int = 100
     ) -> str:
-        """Builds a random word of length N based on the learnt frequency table
+        """Builds a random word of length N based on the learnt frequency table.
 
         Args:
             reference_words (list): Words to learn from
