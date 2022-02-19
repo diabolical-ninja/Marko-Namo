@@ -27,7 +27,7 @@ jobs:
           with:
             path: linting_report.md
 
-    Test & Coverage:
+    Tests_and_Coverage:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
@@ -42,4 +42,4 @@ jobs:
             GODADDY_PROD_KEY: ${{secrets.GODADDY_PROD_KEY}}
             GODADDY_PROD_SECRET: ${{secrets.GODADDY_PROD_SECRET}}
             GODADDY_OTE_KEY: ${{secrets.GODADDY_OTE_KEY}}
-            CODECOGODADDY_OTE_SECRETV_TOKEN: ${{secrets.GODADDY_OTE_SECRET}}
+            GODADDY_OTE_SECRET: ${{secrets.GODADDY_OTE_SECRET}}
