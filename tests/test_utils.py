@@ -1,6 +1,6 @@
 """Unit tests for src/utils.py"""
 
-from src.utils import merge_dictionaries, get_item_list
+from utils import merge_dictionaries, get_item_list
 import pytest
 import sys
 import os
