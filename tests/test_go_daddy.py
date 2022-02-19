@@ -2,8 +2,11 @@
 
 from typing import List
 import os
+import sys
 
-from src.go_daddy import GoDaddy
+from go_daddy import GoDaddy
+
+sys.path.append(os.path.join(os.getcwd(), "src"))
 
 import pytest
 

@@ -2,7 +2,10 @@
 
 from src.utils import merge_dictionaries, get_item_list
 import pytest
+import sys
+import os
 
+sys.path.append(os.path.join(os.getcwd(), "src"))
 
 @pytest.mark.parametrize(
     "test_dict1, test_dict2, expected",
