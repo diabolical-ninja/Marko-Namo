@@ -24,17 +24,17 @@ def lint(session: Session) -> None:
     session.run("flake8", "generate_names.py")
 
 
-# @nox.session(python=PYTHON_VERSION)
-# def tests(session: Session) -> None:
-#     """Runs unit testing & generates coverage report."""
-#     session.install("pytest", "pytest-cov", "pytest-xdist")
-#     session.run("pip", "install", "-r", "requirements.txt")
-#     session.run("pytest", "--cov")
+@nox.session(python=PYTHON_VERSION)
+def tests(session: Session) -> None:
+    """Runs unit testing & generates coverage report."""
+    session.install("pytest", "pytest-cov", "pytest-xdist")
+    session.run("pip", "install", "-r", "requirements.txt")
+    session.run("pytest", "--cov")
 
 
-# @nox.session(python=PYTHON_VERSION)
-# def coverage(session: Session) -> None:
-#     """Upload coverage data."""
-#     session.install("coverage", "codecov")
-#     session.run("coverage", "xml", "--fail-under=0")
-#     session.run("codecov")
+@nox.session(python=PYTHON_VERSION)
+def coverage(session: Session) -> None:
+    """Upload coverage data."""
+    session.install("coverage", "codecov")
+    session.run("coverage", "xml", "--fail-under=0")
+    session.run("codecov")
