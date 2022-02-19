@@ -135,7 +135,7 @@ class RandomNameGenerator:
         return frequency_table
 
     def create_random_word(
-        self, reference_words: list, maximum_word_length: int = 100
+        self, reference_words: List[str], maximum_word_length: int = 100
     ) -> str:
         """Builds a random word of length N based on the learnt frequency table.
 
