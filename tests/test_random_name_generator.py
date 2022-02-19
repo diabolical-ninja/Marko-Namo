@@ -4,7 +4,6 @@ import os
 from typing import List
 from unicodedata import name
 
-from numpy import isin
 from src.random_name_generator import RandomNameGenerator
 from src.go_daddy import GoDaddy
 import pytest
