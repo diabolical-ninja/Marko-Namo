@@ -2,7 +2,6 @@
 
 import os
 from typing import List
-from unicodedata import name
 
 from src.random_name_generator import RandomNameGenerator
 from src.go_daddy import GoDaddy
