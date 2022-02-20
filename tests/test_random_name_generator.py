@@ -2,9 +2,6 @@
 
 import os
 from typing import List
-import sys
-
-sys.path.append(os.path.join(os.getcwd(), "src"))
 
 from random_name_generator import RandomNameGenerator
 from go_daddy import GoDaddy
