@@ -1,16 +1,22 @@
-"""Unit tests for src/random_name_generator.py"""
+"""Unit tests for src/random_name_generator.py ."""
 
 import os
 from typing import List
 
-from random_name_generator import RandomNameGenerator
 from go_daddy import GoDaddy
+
 import pytest
+from pytest import FixtureRequest
+
+from random_name_generator import RandomNameGenerator
 
 
 @pytest.fixture(params=["OTE", "PROD", "NO_DADDY"])
-def setup_go_daddy(request) -> None:
+def setup_go_daddy(request: FixtureRequest) -> None:
     """Create an instance of GoDaddy to test against.
+
+    Args:
+        request (FixtureRequest): Pytest fixture request object
 
     Returns:
         GoDaddy: Instantiated GoDaddy client
@@ -76,7 +82,13 @@ def setup_go_daddy(request) -> None:
 def test_word_letter_frequency(
     test_word: str, n_grams: List[str], expected: dict
 ) -> None:
+    """Passes in sample words & ensures the generated frequency table matches the expected output.
 
+    Args:
+        test_word (str): Word to test with
+        n_grams (List[str]): n-grams to test with, eg [1] or [2,4,5], etc
+        expected (dict): Expected frequency table that should be outputted
+    """
     rng = RandomNameGenerator(
         name_length=1,
         number_of_names=1,
@@ -100,7 +112,12 @@ def test_word_letter_frequency(
     ],
 )
 def test_create_random_word(word_list: List[str], max_word_length: int) -> None:
+    """Generate a random word & ensure they match the expected generation criteria.
 
+    Args:
+        word_list (List[str]): Words to learn from
+        max_word_length (int): Maximum word length to generate
+    """
     rng = RandomNameGenerator(
         name_length=1,
         number_of_names=50,
@@ -139,8 +156,15 @@ def test_create_random_word(word_list: List[str], max_word_length: int) -> None:
         ),
     ],
 )
-def test_create_random_names(setup_go_daddy, inputs: dict) -> None:
+def test_create_random_names(setup_go_daddy: GoDaddy, inputs: dict) -> None:
+    """Generate a suite of random words & ensure they match the expected generation criteria.
 
+    Args:
+        setup_go_daddy (GoDaddy): Connection to the GoDaddy API, or None object
+        inputs (dict): Testing parameter suite that should match:
+            - The config.yml &
+            - RandomNameGenerator init parameters
+    """
     rng = RandomNameGenerator(
         name_length=inputs["name_length"],
         number_of_names=inputs["number_of_names"],
