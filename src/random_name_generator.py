@@ -3,8 +3,9 @@
 import random
 from typing import List, Tuple
 
-import utils as ut
 from go_daddy import GoDaddy
+
+import utils as ut
 
 
 class RandomNameGenerator:
