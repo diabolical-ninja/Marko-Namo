@@ -5,7 +5,30 @@
 
 Simple tool to generate random project or business names using a basic [Markov Chain](https://en.wikipedia.org/wiki/Markov_chain) approach.
 
-## How to Run
+## How It Words
+
+The generator starts by creating a frequency table based on the training words supplied and the n-grams listed. Eg if our training word is `hello` and our n-grams are 1 and 2, we'd get a frequency table of:
+```json
+{
+    "h": ["e", "el"],
+    "he": ["l", "ll"],
+    "e": ["l", "ll"],
+    "el": ["l", "lo"],
+    "l": ["l", "lo", "o", None],
+    "ll": ["o", None],
+    "lo": [None, None],
+    "o": [None, None]
+}
+```
+
+It then randomly selects an n-gram from the frequency table as the first letter, randomly selects a following letter and repeats until the word either ends (selects a `None`) or reaches the maximum word length.
+
+Eg if the first selected letter was `e` we might go:
+- `e` -> `l` -> `lo` -> None
+- Which gives `ello`
+
+
+## How To Run
 
 Everything is controlled via the configuration file (`config.yml`)
 
@@ -16,14 +39,13 @@ python generate_names.py
 
 ### Parameters
 
-
 | Parameter 	| Type 	| Description 	|
 |---	|---	|---	|
 | `number_of_names` 	| Integer 	| Number of names to attempt to create 	|
 | `maximum_name_length` 	| Integer 	| Maximum name length. Note names can be up to length + largest n-gram in length 	|
 | `n_grams` 	| List of integers 	| The word segment lengths to consider for learning and generating new words. 	|
 | `extensions` 	| List of strings 	| Domain extensions to check for such as `.com`, `.ai`, etc 	|
-| `training_words` 	| List of strings 	| Words to learn from and used to generate new, random, words 	|
+| `training_words` 	| List of strings 	| Words to learn from and used to generate new, random, words.  There's no limit to the number of words to learn from but too many will slow the program down significantly. 	|
 
 
 ### Domain Name Lookup
