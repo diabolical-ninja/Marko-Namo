@@ -16,42 +16,14 @@ python generate_names.py
 
 ### Parameters
 
-<table>
-<thead>
-  <tr>
-    <th>Parameter</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>`number_of_names`</td>
-    <td>Integer</td>
-    <td>Number of names to attempt to create</td>
-  </tr>
-  <tr>
-    <td>`maximum_name_length`</td>
-    <td>Integer</td>
-    <td>Maximum name length. Note names can be up to length + largest n-gram in length</td>
-  </tr>
-  <tr>
-    <td>`n_grams`</td>
-    <td>List of integers</td>
-    <td>The word segment lengths to consider for learning and generating new words.<br><br>Eg for the word `abcd`;<br><br>- n-gram of 1:<br>```json<br>{<br>    "a": ["b"],<br>    "b":["c"],<br>    "c":["d"],<br>    "d":[None]<br>}<br>```<br>- n-gram of 2:<br>```json<br>{<br>    "ab":["cd"],<br>    "bc":["d"],<br>    "cd":[None]<br>}<br>```</td>
-  </tr>
-  <tr>
-    <td>`extensions`</td>
-    <td>List of strings</td>
-    <td>Domain extensions to check for such as `.com`, `.ai`, etc</td>
-  </tr>
-  <tr>
-    <td>`training_words`</td>
-    <td>List of strings</td>
-    <td>Words to learn from and used to generate new, random, words</td>
-  </tr>
-</tbody>
-</table>
+
+| Parameter 	| Type 	| Description 	|
+|---	|---	|---	|
+| `number_of_names` 	| Integer 	| Number of names to attempt to create 	|
+| `maximum_name_length` 	| Integer 	| Maximum name length. Note names can be up to length + largest n-gram in length 	|
+| `n_grams` 	| List of integers 	| The word segment lengths to consider for learning and generating new words. 	|
+| `extensions` 	| List of strings 	| Domain extensions to check for such as `.com`, `.ai`, etc 	|
+| `training_words` 	| List of strings 	| Words to learn from and used to generate new, random, words 	|
 
 
 ### Domain Name Lookup
