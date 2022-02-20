@@ -23,4 +23,4 @@ if __name__ == "__main__":
         godaddy=gd,
     )
 
-    rbn.create_business_name()
+    rbn.create_random_names()

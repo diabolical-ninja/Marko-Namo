@@ -1,6 +1,7 @@
 """General Client for interacting with GoDaddy API."""
 
 import json
+import warnings
 
 import requests
 
@@ -50,7 +51,7 @@ class GoDaddy:
         else:
             url = "https://api.ote-godaddy.com/v1/domains/available"
 
-        params = {"checkType": "FAST"}
+        params = {"checkType": "FULL"}
 
         domains = [
             f"{domain}{extension}" for domain in domains for extension in extensions
@@ -67,4 +68,9 @@ class GoDaddy:
             "POST", url, headers=headers, data=payload, params=params
         )
 
-        return response.json()
+        if "domains" in response.json():
+            return response.json()
+        else:
+            warnings.warn("Unable to retrieve domains")
+            warnings.warn(json.dumps(response.json()))
+            return {"domains": []}

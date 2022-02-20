@@ -3,8 +3,9 @@
 import random
 from typing import List, Tuple
 
-import src.utils as ut
-from src.go_daddy import GoDaddy
+from go_daddy import GoDaddy
+
+import utils as ut
 
 
 class RandomNameGenerator:
@@ -36,7 +37,7 @@ class RandomNameGenerator:
         self.training_words = training_words
         self.godaddy = godaddy
 
-    def create_random_name(self) -> Tuple[list, list]:
+    def create_random_names(self) -> Tuple[list, list]:
         """Main method to generate random names.
 
         Returns:
@@ -48,6 +49,7 @@ class RandomNameGenerator:
             self.create_random_word(self.training_words, self.name_length)
             for x in range(0, self.number_of_names)
         ]
+        random_words = list(set(random_words))
 
         created_names = []
         available_domain_names = []
@@ -79,7 +81,7 @@ class RandomNameGenerator:
         print("Generated Names:")
         [print(x) for x in created_names]
         if len(available_domain_names) == 0:
-            print("Did not check for domain name availability")
+            print("Did not check for domain name availability or no domains available")
         else:
             [print(x) for x in available_domain_names]
 
@@ -134,7 +136,7 @@ class RandomNameGenerator:
         return frequency_table
 
     def create_random_word(
-        self, reference_words: list, maximum_word_length: int = 100
+        self, reference_words: List[str], maximum_word_length: int = 100
     ) -> str:
         """Builds a random word of length N based on the learnt frequency table.
 
