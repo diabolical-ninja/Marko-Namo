@@ -21,6 +21,7 @@ def lint(session: Session) -> None:
         "pep8-naming",
     )
     session.run("flake8", "src/")
+    session.run("flake8", "tests/")
     session.run("flake8", "generate_names.py")
 
 
