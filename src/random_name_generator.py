@@ -3,13 +3,13 @@
 import random
 from typing import List, Tuple
 
-from go_daddy import GoDaddy
-
-import utils as ut
+import src.utils as ut
+from src.go_daddy import GoDaddy
 
 
 class RandomNameGenerator:
     """General class to generate random names using a markov approach."""
+
     def __init__(
         self,
         name_length: int,
