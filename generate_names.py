@@ -1,9 +1,9 @@
 """Entry point to generate random names. All settings are controlled via config.yml ."""
 
-from src.go_daddy import GoDaddy
-from src.random_name_generator import RandomNameGenerator
-
 import yaml
+
+from src.go_daddy import GoDaddy
+from src.marko_namo import MarkoNamo
 
 config = yaml.safe_load(open("config.yml"))
 
@@ -14,7 +14,7 @@ gd = GoDaddy(
 )
 
 if __name__ == "__main__":
-    rbn = RandomNameGenerator(
+    rbn = MarkoNamo(
         name_length=config["parameters"]["maximum_name_length"],
         number_of_names=config["parameters"]["number_of_names"],
         domain_extensions=config["extensions"],

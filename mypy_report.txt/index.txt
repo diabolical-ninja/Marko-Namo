@@ -1,0 +1,19 @@
+Mypy Type Check Coverage Summary
+================================
+
+Script: index
+
++----------------------------------+-------------------+---------+
+| Module                           | Imprecision       | Lines   |
++----------------------------------+-------------------+---------+
+| src                              |   0.00% imprecise |   1 LOC |
+| src.go_daddy                     |   9.21% imprecise |  76 LOC |
+| src.marko_namo                   |  16.36% imprecise | 165 LOC |
+| src.utils                        |  19.51% imprecise |  41 LOC |
+| tests                            |   0.00% imprecise |   6 LOC |
+| tests.test_go_daddy              |  18.03% imprecise |  61 LOC |
+| tests.test_random_name_generator |  17.11% imprecise | 187 LOC |
+| tests.test_utils                 |  11.36% imprecise |  44 LOC |
++----------------------------------+-------------------+---------+
+| Total                            |  15.49% imprecise | 581 LOC |
++----------------------------------+-------------------+---------+

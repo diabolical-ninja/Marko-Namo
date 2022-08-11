@@ -1,14 +1,10 @@
-godaddy-prod:
-    key: <your key>
-    secret: <your secret>
-
 parameters:
     number_of_names: 1
     maximum_name_length: 2
     n_grams:
         - 1
         - 2
-        
+
 extensions:
     - .info
     - .dev
@@ -20,3 +16,8 @@ training_words:
     - toasted
     - cheese
     - sandwiches
+
+# Optional
+godaddy-prod:
+    key: <your key>
+    secret: <your secret>
