@@ -1,7 +1,7 @@
 """Unit tests for src/go_daddy.py."""
 
 import os
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List  # noqa
 
 import pytest
 from marko_namo.go_daddy import GoDaddy
@@ -10,6 +10,8 @@ if TYPE_CHECKING:
     from pytest import FixtureRequest as __FixtureRequest
 
     class FixtureRequest(__FixtureRequest):
+        """Overload class for pytest fixtures to include typing."""
+
         param: str
 
 else:
