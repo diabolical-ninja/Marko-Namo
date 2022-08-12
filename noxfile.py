@@ -2,9 +2,12 @@
 
 import tempfile
 
+import nox
 from nox_poetry import Session, session
 
 PYTHON_VERSIONS = ["3.8", "3.9", "3.10"]
+
+nox.options.error_on_missing_interpreters = False
 
 
 @session(python=PYTHON_VERSIONS)
