@@ -21,11 +21,10 @@ def lint(session: Session) -> None:
         "flake8-requirements",
         "pep8-naming",
         "flake8-bugbear",
-        "flake8-bandit",
+        # "flake8-bandit",
     )
     session.run("flake8", "src/")
     session.run("flake8", "tests/")
-    session.run("flake8", "generate_names.py")
 
 
 @session(python=PYTHON_VERSIONS)
@@ -37,7 +36,7 @@ def mypy(session: Session) -> None:
     """
     session.install("mypy", "lxml")
     session.run("poetry", "install", external=True)
-    session.run("mypy", "--txt-report", "mypy_report.txt")
+    session.run("mypy", "--install-types", "--txt-report", "mypy_report.txt")
 
 
 @session(python=PYTHON_VERSIONS)

@@ -1,14 +1,9 @@
 parameters:
-    number_of_names: 1
-    maximum_name_length: 2
+    number_of_names: 5
+    maximum_name_length: 5
     n_grams:
         - 1
         - 2
-
-extensions:
-    - .info
-    - .dev
-    - .ai
 
 training_words:
     - I
@@ -18,6 +13,12 @@ training_words:
     - sandwiches
 
 # Optional
-godaddy-prod:
+godaddy:
     key: <your key>
     secret: <your secret>
+    env: OTE | PROD
+
+extensions:
+    - .info
+    - .dev
+    - .ai
