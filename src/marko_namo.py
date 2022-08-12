@@ -1,43 +1,86 @@
 """Main class to generate random names."""
-
 import random
-from typing import List, Tuple
+from typing import Dict, List, Optional, Tuple
 
-import src.utils as ut
-from src.go_daddy import GoDaddy
+import yaml
+
+import utils as ut
+from go_daddy import GoDaddy
 
 
 class MarkoNamo:
-    """General class to generate random names using a markov approach."""
+    """General class to generate random names using a markov-chain approach."""
 
     def __init__(
         self,
-        name_length: int,
-        number_of_names: int,
-        domain_extensions: List[str],
-        training_words: List[str],
-        n_grams: List[int] = [1, 2, 3],
-        godaddy: GoDaddy = None,
+        name_length: Optional[int] = None,
+        number_of_names: Optional[int] = None,
+        training_words: Optional[List[str]] = None,
+        n_grams: Optional[List[int]] = [1, 2, 3],
+        godaddy_key: Optional[str] = None,
+        godaddy_secret: Optional[str] = None,
+        godaddy_env: Optional[str] = None,
+        domain_extensions: Optional[List[str]] = None,
+        config_file: Optional[str] = None,
     ) -> None:
         """Initialise the class.
+
+        Provide either the arugment inputs OR the path to a config yml with the required keys
 
         Args:
             name_length (int): Maximum word length for the generated name
             number_of_names (int): How many names to attempt to create
-            domain_extensions (List[str]): Desired web domain extensions to examine, eg .com, etc
             training_words (List[str]): The words to learn from for the generation process
             n_grams (List[int], optional): Word parts to use in the learning phase
                 Defaults to [1, 2, 3].
-            godaddy (GoDaddy, optional): Object to interact with their API. Defaults to None.
+            godaddy_key (Optional[str], optional): API Key for GoDaddy. Defaults to None.
+            godaddy_secret (Optional[str], optional): API Secret for GoDaddy.
+                Defaults to None.
+            godaddy_env (Optional[str], optional): Which GoDaddy environment to use; OTE or PROD.
+                Defaults to None.
+            domain_extensions (List[str]): Desired web domain extensions to examine, eg .com, etc
+            config_file (Optional[str], optional): Path to the config file. Defaults to None.
         """
         self.name_length = name_length
         self.number_of_names = number_of_names
         self.n_grams = n_grams
         self.domain_extensions = domain_extensions
         self.training_words = training_words
-        self.godaddy = godaddy
+        self.godaddy_key = godaddy_key
+        self.godaddy_secret = godaddy_secret
+        self.godaddy_env = godaddy_env
 
-    def create_random_names(self) -> Tuple[list, list]:
+        if config_file:
+            config = yaml.safe_load(open(config_file))
+            self.name_length = config["parameters"]["maximum_name_length"]
+            self.number_of_names = config["parameters"]["number_of_names"]
+            self.training_words = config["training_words"]
+            self.n_grams = config["parameters"]["n_grams"]
+            self.domain_extensions = config.get("extensions", None)
+
+            if "godaddy" in config:
+                self.godaddy_key = config["godaddy"]["key"]
+                self.godaddy_secret = config["godaddy"]["secret"]
+                self.godaddy_env = config["godaddy"]["env"]
+
+        # Check if GoDaddy credentials were provided & create a connection if so
+        self.godaddy = None
+        if all([self.godaddy_key, self.godaddy_secret, self.godaddy_env]):
+            self.instantiate_godaddy
+
+    def instantiate_godaddy(self) -> None:
+        """Instantiates a GoDady class."""
+        assert self.godaddy_key is not None
+        assert self.godaddy_secret is not None
+        assert self.godaddy_env is not None
+
+        self.godaddy = GoDaddy(  # type: ignore
+            key=self.godaddy_key,
+            secret=self.godaddy_secret,
+            env=self.godaddy_env,
+        )
+
+    def create_random_names(self) -> Tuple[list, Optional[list]]:
         """Main method to generate random names.
 
         Returns:
@@ -45,6 +88,11 @@ class MarkoNamo:
                 - Created Names
                 - If goDaddy credentials provided, price & availability info for each available name
         """
+        # Ensure minimum required items are present
+        assert self.training_words is not None
+        assert self.name_length is not None
+        assert self.number_of_names is not None
+
         random_words = [
             self.create_random_word(self.training_words, self.name_length)
             for x in range(0, self.number_of_names)
@@ -52,7 +100,7 @@ class MarkoNamo:
         random_words = list(set(random_words))
 
         created_names = []
-        available_domain_names = []
+        available_domain_names: List[str] = []
 
         # If no goDaddy info is provided simply return the randomly created words
         if self.godaddy is None:
@@ -80,6 +128,7 @@ class MarkoNamo:
 
         print("Generated Names:")
         [print(x) for x in created_names]
+        print("")
         if len(available_domain_names) == 0:
             print("Did not check for domain name availability or no domains available")
         else:
@@ -117,8 +166,10 @@ class MarkoNamo:
             dict:
                 - Keys correspond to the n-gram/s charaters
                 - Values are lists of the proceeding n-gram/s characters
+
         """
-        frequency_table = {}
+        frequency_table: Dict[str, List[Optional[str]]] = {}
+        assert self.n_grams is not None
         for i in range(0, len(word)):
             for j in self.n_grams:
                 if len(word) >= i + j:
@@ -150,7 +201,7 @@ class MarkoNamo:
         Returns:
             str: Randomly generated word
         """
-        term_frequencies = {}
+        term_frequencies: Dict[str, List[str]] = {}
         for word in reference_words:
             tmp = self.word_letter_frequency(word)
             term_frequencies = ut.merge_dictionaries(term_frequencies, tmp)

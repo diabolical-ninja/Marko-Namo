@@ -1,12 +1,19 @@
 """Unit tests for src/go_daddy.py."""
 
 import os
-from typing import List
-
-from go_daddy import GoDaddy
+from typing import TYPE_CHECKING, List
 
 import pytest
-from pytest import FixtureRequest
+from go_daddy import GoDaddy
+
+if TYPE_CHECKING:
+    from pytest import FixtureRequest as __FixtureRequest
+
+    class FixtureRequest(__FixtureRequest):
+        param: str
+
+else:
+    from pytest import FixtureRequest
 
 
 @pytest.fixture(params=["OTE", "PROD"])
@@ -56,6 +63,16 @@ def test_check_domain_availability(
         extensions (List[str]): Desired extensions; .com, etc
         num_expected (int): Expected number of responses
     """
-    response = setup_go_daddy.check_domain_availability(domains, extensions)
+    response = setup_go_daddy.check_domain_availability(domains, extensions)  # type: ignore
     assert isinstance(response, dict)
-    assert len(response.get("domains")) == num_expected
+    assert len(response["domains"]) == num_expected
+
+
+def test_wrong_env() -> None:
+    """Tests passing in an invalid environment."""
+    with pytest.raises(Exception):
+        GoDaddy(
+            key=os.getenv("GODADDY_PROD_KEY"),
+            secret=os.getenv("GODADDY_PROD_SECRET"),
+            env="incorrect environment name",
+        )

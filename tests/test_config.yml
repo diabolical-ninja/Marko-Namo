@@ -1,0 +1,24 @@
+parameters:
+    number_of_names: 5
+    maximum_name_length: 5
+    n_grams:
+        - 1
+        - 2
+
+training_words:
+    - I
+    - like
+    - toasted
+    - cheese
+    - sandwiches
+
+# Optional
+godaddy:
+    key: abckey
+    secret: defsecret
+    env: OTE
+
+extensions:
+    - .info
+    - .dev
+    - .ai

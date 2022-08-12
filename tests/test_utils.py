@@ -1,7 +1,6 @@
 """Unit tests for src/utils.py ."""
 
 import pytest
-
 from utils import get_item_list, merge_dictionaries
 
 
@@ -34,7 +33,7 @@ def test_merge_dictionaries(test_dict1: dict, test_dict2: dict, expected: dict) 
     ],
 )
 def test_get_item_list(test_dict: dict, test_key: str, expected: list) -> None:
-    """Tests extracting a list from a given dict regardless of whether the key exists or it's a list.
+    """Tests extracting a list from a given dict regardless of whether the key exists.
 
     Args:
         test_dict (dict): Sample dictionary for testing

@@ -22,10 +22,18 @@ class GoDaddy:
             secret (str): API secret
             env (str, optional): Whether to use PROD or OTE (test).
                 - Defaults to "PROD".
+
+        Raises:
+            Exception: If an invalid environment is provided you'll be notified
         """
         self.key = key
         self.secret = secret
-        self.env = env
+
+        # Validate the GoDaddy environment name
+        if env not in ["OTE", "PROD"]:
+            raise Exception("Acceptable GoDaddy environments are OTE or PROD")
+        else:
+            self.env = env
 
     def check_domain_availability(
         self, domains: list, extensions: list = [".com", ".com.au"]
@@ -69,7 +77,7 @@ class GoDaddy:
         )
 
         if "domains" in response.json():
-            return response.json()
+            return response.json()  # type: ignore
         else:
             warnings.warn("Unable to retrieve domains")
             warnings.warn(json.dumps(response.json()))
