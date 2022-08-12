@@ -4,8 +4,8 @@ from typing import Dict, List, Optional, Tuple
 
 import yaml
 
-import utils as ut
-from go_daddy import GoDaddy
+import marko_namo.utils as ut
+from marko_namo.go_daddy import GoDaddy
 
 
 class MarkoNamo:

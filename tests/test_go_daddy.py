@@ -4,7 +4,7 @@ import os
 from typing import TYPE_CHECKING, List
 
 import pytest
-from go_daddy import GoDaddy
+from marko_namo.go_daddy import GoDaddy
 
 if TYPE_CHECKING:
     from pytest import FixtureRequest as __FixtureRequest
@@ -29,15 +29,15 @@ def setup_go_daddy(request: FixtureRequest) -> GoDaddy:
     if request.param == "PROD":
 
         gd_client = GoDaddy(
-            key=os.getenv("GODADDY_PROD_KEY"),
-            secret=os.getenv("GODADDY_PROD_SECRET"),
+            key=os.environ["GODADDY_PROD_KEY"],
+            secret=os.environ["GODADDY_PROD_SECRET"],
             env=request.param,
         )
 
     elif request.param == "OTE":
         gd_client = GoDaddy(
-            key=os.getenv("GODADDY_OTE_KEY"),
-            secret=os.getenv("GODADDY_OTE_SECRET"),
+            key=os.environ["GODADDY_OTE_KEY"],
+            secret=os.environ["GODADDY_OTE_SECRET"],
             env=request.param,
         )
 
@@ -72,7 +72,7 @@ def test_wrong_env() -> None:
     """Tests passing in an invalid environment."""
     with pytest.raises(Exception):
         GoDaddy(
-            key=os.getenv("GODADDY_PROD_KEY"),
-            secret=os.getenv("GODADDY_PROD_SECRET"),
+            key=os.environ["GODADDY_PROD_KEY"],
+            secret=os.environ["GODADDY_PROD_SECRET"],
             env="incorrect environment name",
         )

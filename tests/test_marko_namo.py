@@ -1,10 +1,10 @@
 """Unit tests for src/random_name_generator.py ."""
 
 import os
-from typing import List
+from typing import List, Optional
 
 import pytest
-from marko_namo import MarkoNamo
+from marko_namo.marko_namo import MarkoNamo
 
 
 @pytest.mark.parametrize(
@@ -47,7 +47,7 @@ from marko_namo import MarkoNamo
     ],
 )
 def test_word_letter_frequency(
-    test_word: str, n_grams: List[str], expected: dict
+    test_word: str, n_grams: Optional[List[int]], expected: dict
 ) -> None:
     """Passes in sample words & ensures the generated frequency table matches the expected output.
 
