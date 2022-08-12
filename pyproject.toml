@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "marko-namo"
-version = "0.2.0"
+version = "0.2.1"
 description = "Markov chain project name generator"
 authors = ["Yass Eltahir <15998949+diabolical-ninja@users.noreply.github.com>"]
 license = "MIT"
