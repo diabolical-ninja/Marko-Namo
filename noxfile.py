@@ -34,9 +34,9 @@ def mypy(session: Session) -> None:
     Args:
         session (Session): Nox Session
     """
-    session.install("mypy", "lxml")
+    session.install("mypy", "lxml", "types-PyYAML")
     session.run("poetry", "install", external=True)
-    session.run("mypy", "--install-types", "--txt-report", "mypy_report.txt")
+    session.run("mypy", "--txt-report", "mypy_report.txt")
 
 
 @session(python=PYTHON_VERSIONS)
