@@ -14,9 +14,9 @@ training_words:
 
 # Optional
 godaddy:
-    key: <your key>
-    secret: <your secret>
-    env: OTE | PROD
+    key: abckey
+    secret: defsecret
+    env: OTE
 
 extensions:
     - .info

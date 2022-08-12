@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "marko-namo"
-version = "0.1.0"
+version = "0.2.0"
 description = "Markov chain project name generator"
 authors = ["Yass Eltahir <15998949+diabolical-ninja@users.noreply.github.com>"]
 license = "MIT"
@@ -40,6 +40,7 @@ myst-parser = "^0.18.0"
 sphinx-autodoc-typehints = "^1.19.2"
 furo = "^2022.6.21"
 sphinx-copybutton = "^0.5.0"
+ipykernel = "^6.15.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

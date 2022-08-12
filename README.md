@@ -14,10 +14,10 @@ The generator starts by creating a frequency table based on the training words s
     "he": ["l", "ll"],
     "e": ["l", "ll"],
     "el": ["l", "lo"],
-    "l": ["l", "lo", "o", None],
-    "ll": ["o", None],
-    "lo": [None, None],
-    "o": [None, None]
+    "l": ["l", "lo", "o", null],
+    "ll": ["o", null],
+    "lo": [null, null],
+    "o": [null, null]
 }
 ```
 
