@@ -2,9 +2,12 @@
 
 import tempfile
 
+import nox
 from nox_poetry import Session, session
 
 PYTHON_VERSIONS = ["3.8", "3.9", "3.10"]
+
+nox.options.error_on_missing_interpreters = False
 
 
 @session(python=PYTHON_VERSIONS)
@@ -34,9 +37,9 @@ def mypy(session: Session) -> None:
     Args:
         session (Session): Nox Session
     """
-    session.install("mypy", "lxml")
+    session.install("mypy", "lxml", "types-PyYAML")
     session.run("poetry", "install", external=True)
-    session.run("mypy", "--install-types", "--txt-report", "mypy_report.txt")
+    session.run("mypy", "--txt-report", "mypy_report.txt")
 
 
 @session(python=PYTHON_VERSIONS)

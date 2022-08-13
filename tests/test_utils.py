@@ -1,7 +1,7 @@
 """Unit tests for src/utils.py ."""
 
 import pytest
-from utils import get_item_list, merge_dictionaries
+from marko_namo.utils import get_item_list, merge_dictionaries
 
 
 @pytest.mark.parametrize(
