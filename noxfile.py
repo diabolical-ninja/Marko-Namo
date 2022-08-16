@@ -7,6 +7,8 @@ from nox_poetry import Session, session
 
 PYTHON_VERSIONS = ["3.8", "3.9", "3.10"]
 
+# Required as GH Actions runs on a matrix of python environments & thus only one
+# interpretter will be available each run
 nox.options.error_on_missing_interpreters = False
 
 
